@@ -3,22 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>リダイレクト</title>
-    <script>
-        // ページが読み込まれたときに実行される
-        window.onload = function() {
-            // URLパスを取得
-            var path = window.location.pathname.split('/');
-
-            // パスが '/discord/' で始まっているか確認
-            if (path.length > 1 && path[1] === 'discord' && path[2]) {
-                var name = path[2];
-                window.location.href = 'https://discord.gg/' + name;
-            }
-        };
-    </script>
+    <title>短縮URLジェネレーター</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
 </head>
 <body>
-    <h1>リダイレクト中...</h1>
+    <div class="container">
+        <h1>短縮URLジェネレーター</h1>
+        <p>長いURLを短縮して、シンプルに共有しよう！</p>
+        <div class="input-group">
+            <input type="text" id="original-url" placeholder="ここにURLを貼り付けてください">
+            <button id="shorten-btn">短縮</button>
+        </div>
+        <div id="shortened-url-container">
+            <p>短縮URL:</p>
+            <a id="shortened-url" href="#" target="_blank"></a>
+        </div>
+    </div>
 </body>
 </html>
