@@ -142,6 +142,14 @@
                     window.location.href = "https://github.com/" + name;
                 }
             }
+
+            // YouTubeリダイレクト（@nameの場合）
+            if (path.startsWith('/youtube/')) {
+                var name = path.split('/')[2];
+                if (name && name.startsWith('@')) {
+                    window.location.href = "https://youtube.com/" + name;
+                }
+            }
         };
     </script>
 </head>
@@ -179,12 +187,16 @@
                 <span class="service-name">GitHub:</span>
                 <a class="example-url" href="/github/example">x7f.xyz/github/example</a>
             </li>
+            <li>
+                <span class="service-name">YouTube:</span>
+                <a class="example-url" href="/youtube/@example">x7f.xyz/youtube/@example</a>
+            </li>
         </ul>
 
         <h2>利用方法</h2>
         <p>上記の形式でサービス名を入力することで、各SNSやGitHubのアカウントに簡単にアクセスできます。</p>
         
-        <p class="note">※URLの「example」を実際のユーザー名に置き換えてご利用ください。</p>
+        <p class="note">※URLの「@example」を実際のユーザー名に置き換えてご利用ください。</p>
     </div>
 </body>
 </html>
