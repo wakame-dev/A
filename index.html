@@ -114,60 +114,61 @@
     <script type="text/javascript">
         window.onload = function() {
             var path = window.location.pathname;
-
-            if (path.startsWith('/vimeo/')) {
+            
+            // リダイレクト処理
+            if (path.startsWith('/x/')) {
                 var name = path.split('/')[2];
                 if (name) {
-                    window.location.href = "https://vimeo.com/" + name;
+                    window.location.href = "https://x.com/" + name;
+                }
+            }
+            
+            if (path.startsWith('/discord/')) {
+                var name = path.split('/')[2];
+                if (name) {
+                    window.location.href = "https://discord.gg/" + name;
+                }
+            }
+
+            if (path.startsWith('/instagram/')) {
+                var name = path.split('/')[2];
+                if (name) {
+                    window.location.href = "https://www.instagram.com/" + name + "/";
+                }
+            }
+
+            if (path.startsWith('/facebook/')) {
+                var name = path.split('/')[2];
+                if (name) {
+                    window.location.href = "https://www.facebook.com/" + name;
+                }
+            }
+
+            if (path.startsWith('/tiktok/')) {
+                var name = path.split('/')[2];
+                if (name) {
+                    window.location.href = "https://www.tiktok.com/@" + name;
+                }
+            }
+
+            if (path.startsWith('/youtube/')) {
+                var name = path.split('/')[2];
+                if (name && name.startsWith('@')) {
+                    window.location.href = "https://youtube.com/" + name;
+                }
+            }
+
+            if (path.startsWith('/snapchat/')) {
+                var name = path.split('/')[2];
+                if (name) {
+                    window.location.href = "https://snapchat.com/add/" + name;
                 }
             }
 
             if (path.startsWith('/pinterest/')) {
                 var name = path.split('/')[2];
                 if (name) {
-                    window.location.href = "https://pinterest.com/" + name;
-                }
-            }
-
-            if (path.startsWith('/periscope/')) {
-                var name = path.split('/')[2];
-                if (name) {
-                    window.location.href = "https://periscope.tv/" + name;
-                }
-            }
-
-            if (path.startsWith('/medium/')) {
-                var name = path.split('/')[2];
-                if (name) {
-                    window.location.href = "https://medium.com/@"+name;
-                }
-            }
-
-            if (path.startsWith('/flickr/')) {
-                var name = path.split('/')[2];
-                if (name) {
-                    window.location.href = "https://flickr.com/people/"+name;
-                }
-            }
-
-            if (path.startsWith('/behance/')) {
-                var name = path.split('/')[2];
-                if (name) {
-                    window.location.href = "https://behance.net/" + name;
-                }
-            }
-
-            if (path.startsWith('/steam/')) {
-                var name = path.split('/')[2];
-                if (name) {
-                    window.location.href = "https://steamcommunity.com/id/" + name;
-                }
-            }
-
-            if (path.startsWith('/twitch/')) {
-                var name = path.split('/')[2];
-                if (name) {
-                    window.location.href = "https://www.twitch.tv/" + name;
+                    window.location.href = "https://www.pinterest.com/" + name;
                 }
             }
 
@@ -175,6 +176,13 @@
                 var name = path.split('/')[2];
                 if (name) {
                     window.location.href = "https://www.reddit.com/user/" + name;
+                }
+            }
+
+            if (path.startsWith('/twitch/')) {
+                var name = path.split('/')[2];
+                if (name) {
+                    window.location.href = "https://www.twitch.tv/" + name;
                 }
             }
         };
@@ -207,14 +215,6 @@
                 <a class="example-url" href="/tiktok/example">x7f.xyz/tiktok/example</a>
             </li>
             <li>
-                <span class="service-name">Bluesky:</span>
-                <a class="example-url" href="/bluesky/example">x7f.xyz/bluesky/example</a>
-            </li>
-            <li>
-                <span class="service-name">GitHub:</span>
-                <a class="example-url" href="/github/example">x7f.xyz/github/example</a>
-            </li>
-            <li>
                 <span class="service-name">YouTube:</span>
                 <a class="example-url" href="/youtube/@example">x7f.xyz/youtube/@example</a>
             </li>
@@ -223,32 +223,27 @@
                 <a class="example-url" href="/snapchat/example">x7f.xyz/snapchat/example</a>
             </li>
             <li>
-                <span class="service-name">Dribbble:</span>
-                <a class="example-url" href="/dribbble/example">x7f.xyz/dribbble/example</a>
+                <span class="service-name">Pinterest:</span>
+                <a class="example-url" href="/pinterest/example">x7f.xyz/pinterest/example</a>
             </li>
             <li>
-                <span class="service-name">Quora:</span>
-                <a class="example-url" href="/quora/example">x7f.xyz/quora/example</a>
+                <span class="service-name">Reddit:</span>
+                <a class="example-url" href="/reddit/example">x7f.xyz/reddit/example</a>
             </li>
             <li>
-                <span class="service-name">Tumblr:</span>
-                <a class="example-url" href="/tumblr/example">x7f.xyz/tumblr/example</a>
-            </li>
-            <li>
-                <span class="service-name">ReverbNation:</span>
-                <a class="example-url" href="/reverbnation/example">x7f.xyz/reverbnation/example</a>
-            </li>
-            <li>
-                <span class="service-name">Mailchimp:</span>
-                <a class="example-url" href="/mailchimp/example">x7f.xyz/mailchimp/example</a>
+                <span class="service-name">Twitch:</span>
+                <a class="example-url" href="/twitch/example">x7f.xyz/twitch/example</a>
             </li>
         </ul>
 
-        <h2>短縮URLの紹介</h2>
-        <p>自分のリンクを簡単に短縮するには、以下のサービスをご利用ください:</p>
-        <p class="short-link"><a href="/short">x7f.xyz/short</a></p>
+        <h2>利用方法</h2>
+        <p>上記の形式でサービス名を入力することで、各SNSやGitHubのアカウントに簡単にアクセスできます。</p>
+        
+        <p class="note">※URLの「@example」を実際のユーザー名に置き換えてご利用ください。</p>
 
-        <p class="note">追加して欲しいサービスがあれば info@x7f.xyz にサービス名を送信ください。</p>
+        <div class="short-link">
+            <p>短縮はこちら: <a href="https://x7f.xyz/short" target="_blank">x7f.xyz/short</a></p>
+        </div>
     </div>
 </body>
 </html>
