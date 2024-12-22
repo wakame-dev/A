@@ -114,83 +114,42 @@
         .short-link a:hover {
             text-decoration: underline;
         }
+
+        /* フォームのスタイル */
+        .form-container {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #fafafa;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-container select, .form-container input, .form-container button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+        }
+
+        .form-container button {
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .form-container button:hover {
+            background-color: #0056b3;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
     </style>
-    <script type="text/javascript">
-        window.onload = function() {
-            var path = window.location.pathname;
-            
-            // リダイレクト処理
-            if (path.startsWith('/x/')) {
-                var name = path.split('/')[2];
-                if (name) {
-                    window.location.href = "https://x.com/" + name;
-                }
-            }
-            
-            if (path.startsWith('/discord/')) {
-                var name = path.split('/')[2];
-                if (name) {
-                    window.location.href = "https://discord.gg/" + name;
-                }
-            }
-
-            if (path.startsWith('/instagram/')) {
-                var name = path.split('/')[2];
-                if (name) {
-                    window.location.href = "https://www.instagram.com/" + name + "/";
-                }
-            }
-
-            if (path.startsWith('/facebook/')) {
-                var name = path.split('/')[2];
-                if (name) {
-                    window.location.href = "https://www.facebook.com/" + name;
-                }
-            }
-
-            if (path.startsWith('/tiktok/')) {
-                var name = path.split('/')[2];
-                if (name) {
-                    window.location.href = "https://www.tiktok.com/@" + name;
-                }
-            }
-
-            if (path.startsWith('/youtube/')) {
-                var name = path.split('/')[2];
-                if (name && name.startsWith('@')) {
-                    window.location.href = "https://youtube.com/" + name;
-                }
-            }
-
-            if (path.startsWith('/snapchat/')) {
-                var name = path.split('/')[2];
-                if (name) {
-                    window.location.href = "https://snapchat.com/add/" + name;
-                }
-            }
-
-            if (path.startsWith('/pinterest/')) {
-                var name = path.split('/')[2];
-                if (name) {
-                    window.location.href = "https://www.pinterest.com/" + name;
-                }
-            }
-
-            if (path.startsWith('/reddit/')) {
-                var name = path.split('/')[2];
-                if (name) {
-                    window.location.href = "https://www.reddit.com/user/" + name;
-                }
-            }
-
-            if (path.startsWith('/twitch/')) {
-                var name = path.split('/')[2];
-                if (name) {
-                    window.location.href = "https://www.twitch.tv/" + name;
-                }
-            }
-        };
-    </script>
 </head>
 <body>
     <div class="container">
@@ -240,6 +199,30 @@
             </li>
         </ul>
 
+        <h2>リダイレクトURL生成</h2>
+        <div class="form-container">
+            <label for="service">サービス選択</label>
+            <select id="service">
+                <option value="x">X (旧Twitter)</option>
+                <option value="discord">Discord</option>
+                <option value="instagram">Instagram</option>
+                <option value="facebook">Facebook</option>
+                <option value="tiktok">TikTok</option>
+                <option value="youtube">YouTube</option>
+                <option value="snapchat">Snapchat</option>
+                <option value="pinterest">Pinterest</option>
+                <option value="reddit">Reddit</option>
+                <option value="twitch">Twitch</option>
+            </select>
+
+            <label for="username">ユーザー名またはサーバー名</label>
+            <input type="text" id="username" placeholder="ユーザー名を入力してください">
+
+            <button onclick="generateUrl()">生成</button>
+
+            <div class="result" id="result"></div>
+        </div>
+
         <h2>利用方法</h2>
         <p>上記の形式でサービス名を入力することで、各SNSやGitHubのアカウントに簡単にアクセスできます。</p>
         
@@ -249,5 +232,56 @@
             <p>短縮はこちら: <a href="https://x7f.xyz/short" target="_blank">x7f.xyz/short</a></p>
         </div>
     </div>
+
+    <script>
+        function generateUrl() {
+            var service = document.getElementById("service").value;
+            var username = document.getElementById("username").value;
+            var url = "";
+
+            if (username === "") {
+                alert("ユーザー名を入力してください");
+                return;
+            }
+
+            switch(service) {
+                case "x":
+                    url = "https://x.com/" + username;
+                    break;
+                case "discord":
+                    url = "https://discord.gg/" + username;
+                    break;
+                case "instagram":
+                    url = "https://www.instagram.com/" + username + "/";
+                    break;
+                case "facebook":
+                    url = "https://www.facebook.com/" + username;
+                    break;
+                case "tiktok":
+                    url = "https://www.tiktok.com/@" + username;
+                    break;
+                case "youtube":
+                    url = "https://youtube.com/" + username;
+                    break;
+                case "snapchat":
+                    url = "https://snapchat.com/add/" + username;
+                    break;
+                case "pinterest":
+                    url = "https://www.pinterest.com/" + username;
+                    break;
+                case "reddit":
+                    url = "https://www.reddit.com/user/" + username;
+                    break;
+                case "twitch":
+                    url = "https://www.twitch.tv/" + username;
+                    break;
+                default:
+                    alert("選択されたサービスが無効です");
+                    return;
+            }
+
+            document.getElementById("result").innerHTML = "生成されたURL: <a href='" + url + "' target='_blank'>" + url + "</a>";
+        }
+    </script>
 </body>
 </html>
