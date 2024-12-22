@@ -103,24 +103,41 @@
                         videoElement.srcObject = stream;
 
                         // スキャナーを開始
-                        qrScanner = new Html5QrcodeScanner("scanner", {
-                            fps: 10,
-                            qrbox: 250
+                        const html5QrCode = new Html5Qrcode("scanner");
+
+                        // スキャン開始
+                        html5QrCode.start(
+                            { facingMode: "environment" }, // カメラ設定
+                            {
+                                fps: 10, // スキャン速度
+                                qrbox: 250 // QRコードをスキャンするエリアのサイズ
+                            },
+                            onScanSuccess,
+                            onScanError
+                        ).catch(function (err) {
+                            console.error("カメラが起動できませんでした。", err);
+                            alert("カメラアクセスを確認してください。");
                         });
-                        qrScanner.render(onScanSuccess);
                     })
                     .catch(function (err) {
-                        // カメラのアクセスが拒否された場合、何も表示しない
-                        console.error("カメラアクセスが拒否されました。");
+                        console.error("カメラアクセスが拒否されました。", err);
+                        alert("カメラのアクセスを許可してください");
                     });
             } else {
-                console.error("このブラウザではカメラのアクセスがサポートされていません。");
+                alert("このブラウザではカメラが使用できません");
             }
         }
 
         // QRコードスキャン成功時の処理
         function onScanSuccess(decodedText, decodedResult) {
+            // スキャン結果を表示
             document.getElementById('scan-result').textContent = 'スキャン結果: ' + decodedText;
+        }
+
+        // QRコードスキャン失敗時の処理
+        function onScanError(errorMessage) {
+            // 失敗時のエラーメッセージ表示（必要に応じて）
+            console.warn("QRコード読み取りエラー:", errorMessage);
         }
     </script>
 </body>
