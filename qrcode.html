@@ -54,7 +54,8 @@
         <h3>QRコードを生成</h3>
         <input type="text" id="qr-input" placeholder="QRコードの内容を入力">
         <button onclick="generateQRCode()">生成</button>
-        <div id="qrcode"></div>
+        <!-- QRコードを描画するためのCanvas要素 -->
+        <canvas id="qrcode"></canvas>
 
         <h3>QRコードをスキャン</h3>
         <button onclick="startScanner()">スキャン開始</button>
@@ -72,9 +73,10 @@
         // QRコード生成
         function generateQRCode() {
             const inputText = document.getElementById('qr-input').value;
+            const canvas = document.getElementById('qrcode');
             if (inputText) {
-                // QRコードを生成してCanvasに表示
-                QRCode.toCanvas(document.getElementById('qrcode'), inputText, function (error) {
+                // QRコードを生成してCanvasに描画
+                QRCode.toCanvas(canvas, inputText, function (error) {
                     if (error) {
                         console.error(error);
                     }
