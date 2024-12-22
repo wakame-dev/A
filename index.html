@@ -7,16 +7,13 @@
     <script>
         // ページが読み込まれたときに実行される
         window.onload = function() {
-            // URLパスから名前を取得する
+            // URLパスを取得
             var path = window.location.pathname.split('/');
-            var name = path[path.length - 1];
 
-            // DiscordのURLにリダイレクト
-            if (name) {
+            // パスが '/discord/' で始まっているか確認
+            if (path.length > 1 && path[1] === 'discord' && path[2]) {
+                var name = path[2];
                 window.location.href = 'https://discord.gg/' + name;
-            } else {
-                // 名前がない場合はデフォルトリダイレクト
-                window.location.href = '/discord';
             }
         };
     </script>
