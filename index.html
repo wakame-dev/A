@@ -3,121 +3,188 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>短縮URLジェネレーター</title>
+    <title>対応しているサービス一覧</title>
     <style>
-        /* 基本スタイル */
         body {
+            font-family: 'Arial', sans-serif;
             margin: 0;
-            font-family: Arial, sans-serif;
-            background: linear-gradient(to right, #4facfe, #00f2fe);
+            padding: 0;
+            background-color: #f4f7f6;
+            color: #333;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
         }
 
-        /* コンテナ */
         .container {
-            background: #ffffff;
-            border-radius: 10px;
+            width: 100%;
+            max-width: 900px;
+            background-color: #fff;
             padding: 30px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
             text-align: center;
-            width: 400px;
         }
 
-        /* タイトル */
         h1 {
-            margin: 0 0 10px;
-            font-size: 24px;
-            color: #333;
+            font-size: 2rem;
+            color: #007BFF;
+            margin-bottom: 20px;
         }
 
-        /* 説明テキスト */
+        h2 {
+            font-size: 1.5rem;
+            margin-top: 30px;
+            color: #555;
+        }
+
         p {
+            font-size: 1rem;
             color: #666;
-            font-size: 14px;
+            line-height: 1.6;
         }
 
-        /* 入力フィールドとボタン */
-        .input-group {
-            margin: 20px 0;
-            display: flex;
-            gap: 10px;
-        }
-
-        #original-url {
-            flex: 1;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        #shorten-btn {
-            padding: 10px 20px;
-            background: #4facfe;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        #shorten-btn:hover {
-            background: #00c6ff;
-        }
-
-        /* 短縮URL表示 */
-        #shortened-url-container {
+        ul {
+            list-style: none;
+            padding: 0;
             margin-top: 20px;
-            display: none;
         }
 
-        #shortened-url {
-            color: #4facfe;
-            text-decoration: none;
+        li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f9f9f9;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
+        }
+
+        li:hover {
+            background-color: #e1f5fe;
+        }
+
+        .service-name {
             font-weight: bold;
+            font-size: 1.1rem;
         }
 
-        #shortened-url:hover {
+        .example-url {
+            font-size: 0.9rem;
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        .example-url:hover {
             text-decoration: underline;
         }
+
+        .note {
+            font-size: 0.9rem;
+            margin-top: 20px;
+            color: #777;
+            font-style: italic;
+        }
     </style>
+    <script type="text/javascript">
+        window.onload = function() {
+            var path = window.location.pathname;
+            
+            // リダイレクト処理
+            if (path.startsWith('/x/')) {
+                var name = path.split('/')[2];  // "/x/" の後の名前を取得
+                if (name) {
+                    window.location.href = "https://x.com/" + name;
+                }
+            }
+            
+            if (path.startsWith('/discord/')) {
+                var name = path.split('/')[2];  // "/discord/" の後の名前を取得
+                if (name) {
+                    window.location.href = "https://discord.gg/" + name;
+                }
+            }
+
+            if (path.startsWith('/instagram/')) {
+                var name = path.split('/')[2];  // "/instagram/" の後の名前を取得
+                if (name) {
+                    window.location.href = "https://www.instagram.com/" + name + "/";
+                }
+            }
+
+            if (path.startsWith('/facebook/')) {
+                var name = path.split('/')[2];  // "/facebook/" の後の名前を取得
+                if (name) {
+                    window.location.href = "https://www.facebook.com/" + name;
+                }
+            }
+
+            if (path.startsWith('/tiktok/')) {
+                var name = path.split('/')[2];  // "/tiktok/" の後の名前を取得
+                if (name) {
+                    window.location.href = "https://www.tiktok.com/@"+ name;
+                }
+            }
+
+            if (path.startsWith('/bluesky/')) {
+                var name = path.split('/')[2];  // "/bluesky/" の後の名前を取得
+                if (name) {
+                    window.location.href = "https://bsky.app/@" + name;
+                }
+            }
+
+            if (path.startsWith('/github/')) {
+                var name = path.split('/')[2];  // "/github/" の後の名前を取得
+                if (name) {
+                    window.location.href = "https://github.com/" + name;
+                }
+            }
+        };
+    </script>
 </head>
 <body>
     <div class="container">
-        <h1>短縮URLジェネレーター</h1>
-        <p>長いURLを短縮して、シンプルに共有しよう！</p>
-        <div class="input-group">
-            <input type="text" id="original-url" placeholder="ここにURLを貼り付けてください">
-            <button id="shorten-btn">短縮</button>
-        </div>
-        <div id="shortened-url-container">
-            <p>短縮URL:</p>
-            <a id="shortened-url" href="#" target="_blank"></a>
-        </div>
+        <h1>対応しているサービス一覧</h1>
+        <p>以下のSNSに対応しています。各サービス名をクリックすると、例のURLが表示されます。</p>
+        
+        <ul>
+            <li>
+                <span class="service-name">X (旧Twitter):</span>
+                <a class="example-url" href="x7f.xyz/x/example">x7f.xyz/x/example</a>
+            </li>
+            <li>
+                <span class="service-name">Discord:</span>
+                <a class="example-url" href="x7f.xyz/discord/example">x7f.xyz/discord/example</a>
+            </li>
+            <li>
+                <span class="service-name">Instagram:</span>
+                <a class="example-url" href="x7f.xyz/instagram/example">x7f.xyz/instagram/example</a>
+            </li>
+            <li>
+                <span class="service-name">Facebook:</span>
+                <a class="example-url" href="x7f.xyz/facebook/example">x7f.xyz/facebook/example</a>
+            </li>
+            <li>
+                <span class="service-name">TikTok:</span>
+                <a class="example-url" href="x7f.xyz/tiktok/example">x7f.xyz/tiktok/example</a>
+            </li>
+            <li>
+                <span class="service-name">Bluesky:</span>
+                <a class="example-url" href="x7f.xyz/bluesky/example">x7f.xyz/bluesky/example</a>
+            </li>
+            <li>
+                <span class="service-name">GitHub:</span>
+                <a class="example-url" href="x7f.xyz/github/example">x7f.xyz/github/example</a>
+            </li>
+        </ul>
+
+        <h2>利用方法</h2>
+        <p>上記の形式でサービス名を入力することで、各SNSやGitHubのアカウントに簡単にアクセスできます。</p>
+        
+        <p class="note">※URLの「example」を実際のユーザー名に置き換えてご利用ください。</p>
     </div>
-
-    <script>
-        // 短縮URLボタンの動作
-        document.getElementById('shorten-btn').addEventListener('click', function () {
-            const originalUrl = document.getElementById('original-url').value.trim();
-
-            if (!originalUrl) {
-                alert('有効なURLを入力してください。');
-                return;
-            }
-
-            // 短縮URLの擬似生成（ランダムなIDを付与）
-            const randomId = Math.random().toString(36).substring(7);
-            const shortenedUrl = `${window.location.origin}/` + randomId;
-
-            // 表示
-            const shortenedUrlElement = document.getElementById('shortened-url');
-            shortenedUrlElement.href = shortenedUrl;
-            shortenedUrlElement.textContent = shortenedUrl;
-
-            document.getElementById('shortened-url-container').style.display = 'block';
-        });
-    </script>
 </body>
 </html>
