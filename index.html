@@ -114,62 +114,67 @@
     <script type="text/javascript">
         window.onload = function() {
             var path = window.location.pathname;
-            
-            // リダイレクト処理
-            if (path.startsWith('/x/')) {
+
+            if (path.startsWith('/vimeo/')) {
                 var name = path.split('/')[2];
                 if (name) {
-                    window.location.href = "https://x.com/" + name;
-                }
-            }
-            
-            if (path.startsWith('/discord/')) {
-                var name = path.split('/')[2];
-                if (name) {
-                    window.location.href = "https://discord.gg/" + name;
+                    window.location.href = "https://vimeo.com/" + name;
                 }
             }
 
-            if (path.startsWith('/instagram/')) {
+            if (path.startsWith('/pinterest/')) {
                 var name = path.split('/')[2];
                 if (name) {
-                    window.location.href = "https://www.instagram.com/" + name + "/";
+                    window.location.href = "https://pinterest.com/" + name;
                 }
             }
 
-            if (path.startsWith('/facebook/')) {
+            if (path.startsWith('/periscope/')) {
                 var name = path.split('/')[2];
                 if (name) {
-                    window.location.href = "https://www.facebook.com/" + name;
+                    window.location.href = "https://periscope.tv/" + name;
                 }
             }
 
-            if (path.startsWith('/tiktok/')) {
+            if (path.startsWith('/medium/')) {
                 var name = path.split('/')[2];
                 if (name) {
-                    window.location.href = "https://www.tiktok.com/@" + name;
+                    window.location.href = "https://medium.com/@"+name;
                 }
             }
 
-            if (path.startsWith('/bluesky/')) {
+            if (path.startsWith('/flickr/')) {
                 var name = path.split('/')[2];
                 if (name) {
-                    window.location.href = "https://bsky.app/profile/" + name;
+                    window.location.href = "https://flickr.com/people/"+name;
                 }
             }
 
-            if (path.startsWith('/github/')) {
+            if (path.startsWith('/behance/')) {
                 var name = path.split('/')[2];
                 if (name) {
-                    window.location.href = "https://github.com/" + name;
+                    window.location.href = "https://behance.net/" + name;
                 }
             }
 
-            // YouTubeリダイレクト（@nameの場合）
-            if (path.startsWith('/youtube/')) {
+            if (path.startsWith('/steam/')) {
                 var name = path.split('/')[2];
-                if (name && name.startsWith('@')) {
-                    window.location.href = "https://youtube.com/" + name;
+                if (name) {
+                    window.location.href = "https://steamcommunity.com/id/" + name;
+                }
+            }
+
+            if (path.startsWith('/twitch/')) {
+                var name = path.split('/')[2];
+                if (name) {
+                    window.location.href = "https://www.twitch.tv/" + name;
+                }
+            }
+
+            if (path.startsWith('/reddit/')) {
+                var name = path.split('/')[2];
+                if (name) {
+                    window.location.href = "https://www.reddit.com/user/" + name;
                 }
             }
         };
@@ -213,16 +218,39 @@
                 <span class="service-name">YouTube:</span>
                 <a class="example-url" href="/youtube/@example">x7f.xyz/youtube/@example</a>
             </li>
+            <li>
+                <span class="service-name">Snapchat:</span>
+                <a class="example-url" href="/snapchat/example">x7f.xyz/snapchat/example</a>
+            </li>
+            <li>
+                <span class="service-name">Dribbble:</span>
+                <a class="example-url" href="/dribbble/example">x7f.xyz/dribbble/example</a>
+            </li>
+            <li>
+                <span class="service-name">Quora:</span>
+                <a class="example-url" href="/quora/example">x7f.xyz/quora/example</a>
+            </li>
+            <li>
+                <span class="service-name">Tumblr:</span>
+                <a class="example-url" href="/tumblr/example">x7f.xyz/tumblr/example</a>
+            </li>
+            <li>
+                <span class="service-name">ReverbNation:</span>
+                <a class="example-url" href="/reverbnation/example">x7f.xyz/reverbnation/example</a>
+            </li>
+            <li>
+                <span class="service-name">Mailchimp:</span>
+                <a class="example-url" href="/mailchimp/example">x7f.xyz/mailchimp/example</a>
+            </li>
+            <li>
+                <span class="service-name">Weebly:</span>
+                <a class="example-url" href="/weebly/example">x7f.xyz/weebly/example</a>
+            </li>
+            <li>
+                <span class="service-name">Vero:</span>
+                <a class="example-url" href="/vero/example">x7f.xyz/vero/example</a>
+            </li>
         </ul>
-
-        <h2>利用方法</h2>
-        <p>上記の形式でサービス名を入力することで、各SNSやGitHubのアカウントに簡単にアクセスできます。</p>
-        
-        <p class="note">※URLの「@example」を実際のユーザー名に置き換えてご利用ください。</p>
-
-        <div class="short-link">
-            <p>短縮はこちら: <a href="https://x7f.xyz/short" target="_blank">x7f.xyz/short</a></p>
-        </div>
     </div>
 </body>
 </html>
