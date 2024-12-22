@@ -56,173 +56,144 @@
             line-height: 1.6;
         }
 
-        ul {
-            list-style: none;
-            padding: 0;
-            margin-top: 20px;
-        }
-
-        li {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #f9f9f9;
-            padding: 12px;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.3s ease;
-        }
-
-        li:hover {
-            background-color: #e1f5fe;
-        }
-
-        .service-name {
-            font-weight: bold;
-            font-size: 1.1rem;
-        }
-
-        .example-url {
-            font-size: 0.9rem;
-            color: #007BFF;
-            text-decoration: none;
-        }
-
-        .example-url:hover {
-            text-decoration: underline;
-        }
-
-        .note {
-            font-size: 0.9rem;
-            margin-top: 20px;
-            color: #777;
-            font-style: italic;
-        }
-
-        .short-link {
-            margin-top: 30px;
-            font-size: 1.1rem;
-            font-weight: bold;
-        }
-
-        .short-link a {
-            color: #007BFF;
-            text-decoration: none;
-        }
-
-        .short-link a:hover {
-            text-decoration: underline;
-        }
-
-        /* フォームのスタイル */
-        .form-container {
-            margin-top: 30px;
-            padding: 20px;
-            background-color: #fafafa;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .form-container select, .form-container input, .form-container button {
-            width: 100%;
-            padding: 12px;
-            margin-top: 10px;
-            border-radius: 8px;
-            border: 1px solid #ddd;
+        select, input[type="text"] {
             font-size: 1rem;
+            padding: 10px;
+            margin-top: 10px;
+            width: 100%;
+            max-width: 400px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
         }
 
-        .form-container button {
+        button {
+            font-size: 1rem;
+            padding: 10px 20px;
             background-color: #007BFF;
-            color: white;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
             cursor: pointer;
-            font-weight: bold;
         }
 
-        .form-container button:hover {
+        button:hover {
             background-color: #0056b3;
         }
 
-        .result {
+        .short-url {
             margin-top: 20px;
-            font-size: 1.1rem;
-            font-weight: bold;
+            font-size: 1.2rem;
         }
 
-        .result a {
+        .short-url a {
             color: #007BFF;
             text-decoration: none;
         }
 
-        .result a:hover {
+        .short-url a:hover {
             text-decoration: underline;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>対応しているサービス一覧</h1>
-        <p>以下のSNSに対応しています。各サービス名をクリックすると、例のURLが表示されます。</p>
-        
-        <ul>
-            <li><span class="service-name">X (旧Twitter):</span><a class="example-url" href="/x/example">x7f.xyz/x/example</a></li>
-            <li><span class="service-name">Discord:</span><a class="example-url" href="/discord/example">x7f.xyz/discord/example</a></li>
-            <li><span class="service-name">Instagram:</span><a class="example-url" href="/instagram/example">x7f.xyz/instagram/example</a></li>
-            <li><span class="service-name">Facebook:</span><a class="example-url" href="/facebook/example">x7f.xyz/facebook/example</a></li>
-            <li><span class="service-name">TikTok:</span><a class="example-url" href="/tiktok/example">x7f.xyz/tiktok/example</a></li>
-            <li><span class="service-name">YouTube:</span><a class="example-url" href="/youtube/@example">x7f.xyz/youtube/@example</a></li>
-            <li><span class="service-name">Reddit:</span><a class="example-url" href="/reddit/example">x7f.xyz/reddit/example</a></li>
-            <li><span class="service-name">Twitch:</span><a class="example-url" href="/twitch/example">x7f.xyz/twitch/example</a></li>
-        </ul>
+        <h1>リダイレクトサービス</h1>
+        <p>サービス名とユーザー名を入力して、短縮URLを生成してください。</p>
 
-        <h2>リダイレクトURL生成</h2>
-        <div class="form-container">
-            <label for="service">サービス選択</label>
-            <select id="service">
-                <option value="x">X (旧Twitter)</option>
-                <option value="discord">Discord</option>
-                <option value="instagram">Instagram</option>
-                <option value="facebook">Facebook</option>
-                <option value="tiktok">TikTok</option>
-                <option value="youtube">YouTube</option>
-                <option value="reddit">Reddit</option>
-                <option value="twitch">Twitch</option>
-            </select>
+        <select id="serviceSelect">
+            <option value="x">X (旧Twitter)</option>
+            <option value="discord">Discord</option>
+            <option value="instagram">Instagram</option>
+            <option value="facebook">Facebook</option>
+            <option value="tiktok">TikTok</option>
+            <option value="youtube">YouTube</option>
+            <option value="snapchat">Snapchat</option>
+            <option value="pinterest">Pinterest</option>
+            <option value="reddit">Reddit</option>
+            <option value="twitch">Twitch</option>
+        </select>
 
-            <label for="username">ユーザー名またはサーバー名</label>
-            <input type="text" id="username" placeholder="ユーザー名を入力してください" />
+        <input type="text" id="usernameInput" placeholder="ユーザー名またはサーバー名を入力" />
 
-            <button onclick="generateUrl()">生成</button>
+        <button onclick="generateUrl()">URL生成</button>
 
-            <div class="result" id="result"></div>
-        </div>
-
-        <h2>利用方法</h2>
-        <p>上記の形式でサービス名を入力することで、各SNSやGitHubのアカウントに簡単にアクセスできます。</p>
-        
-        <p class="note">※URLの「@example」を実際のユーザー名に置き換えてご利用ください。</p>
-
-        <div class="short-link">
-            <p>短縮はこちら: <a href="https://x7f.xyz/short" target="_blank">x7f.xyz/short</a></p>
-        </div>
+        <div class="short-url" id="result"></div>
     </div>
 
-    <script>
-        function generateUrl() {
-            var service = document.getElementById("service").value;
-            var username = document.getElementById("username").value.trim();
-            var url = "";
+    <script type="text/javascript">
+        window.onload = function() {
+            var path = window.location.pathname;
+            var pathArray = path.split('/');
 
-            if (!username) {
-                alert("ユーザー名を入力してください");
+            // リダイレクト処理
+            if (pathArray.length === 3) {
+                var service = pathArray[1];
+                var username = pathArray[2];
+
+                var redirectUrl = "";
+
+                // サービスごとのURL設定
+                switch (service) {
+                    case "x":
+                        redirectUrl = "https://x.com/" + username;
+                        break;
+                    case "discord":
+                        redirectUrl = "https://discord.gg/" + username;
+                        break;
+                    case "instagram":
+                        redirectUrl = "https://www.instagram.com/" + username;
+                        break;
+                    case "facebook":
+                        redirectUrl = "https://www.facebook.com/" + username;
+                        break;
+                    case "tiktok":
+                        redirectUrl = "https://www.tiktok.com/@" + username;
+                        break;
+                    case "youtube":
+                        redirectUrl = "https://youtube.com/" + username;
+                        break;
+                    case "snapchat":
+                        redirectUrl = "https://snapchat.com/add/" + username;
+                        break;
+                    case "pinterest":
+                        redirectUrl = "https://www.pinterest.com/" + username;
+                        break;
+                    case "reddit":
+                        redirectUrl = "https://www.reddit.com/user/" + username;
+                        break;
+                    case "twitch":
+                        redirectUrl = "https://www.twitch.tv/" + username;
+                        break;
+                    default:
+                        redirectUrl = ""; // 対応していないサービスの場合
+                        break;
+                }
+
+                if (redirectUrl) {
+                    window.location.href = redirectUrl;
+                } else {
+                    document.body.innerHTML = "<h1>対応していないサービスです。</h1><p>ご指定のサービスはサポートされていません。</p>";
+                }
+            }
+        };
+
+        function generateUrl() {
+            var service = document.getElementById('serviceSelect').value;
+            var username = document.getElementById('usernameInput').value.trim();
+
+            if (username === "") {
+                alert("ユーザー名またはサーバー名を入力してください。");
                 return;
             }
 
-            // x7f.xyz/サービス名/ユーザー名またはサーバー名形式に変更
-            url = "https://x7f.xyz/" + service + "/" + username;
+            var generatedUrl = "https://x7f.xyz/" + service + "/" + username;
+            var resultDiv = document.getElementById('result');
 
-            document.getElementById("result").innerHTML = "生成されたURL: <a href='" + url + "' target='_blank'>" + url + "</a>";
+            resultDiv.innerHTML = `
+                <p>生成された短縮URL: <a href="${generatedUrl}" target="_blank">${generatedUrl}</a></p>
+                <p>このURLをクリックすると、指定したサービスのページにリダイレクトします。</p>
+            `;
         }
     </script>
 </body>
