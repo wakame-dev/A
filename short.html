@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>短縮URLサービス</title>
+    <style>
+        /* === CSS === */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f9fafc;
+        }
+
+        .container {
+            text-align: center;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #0078d7;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #005ea3;
+        }
+
+        p#result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!-- === HTML === -->
+    <div class="container">
+        <h1>短縮URLサービス</h1>
+        <input type="text" id="longUrl" placeholder="短縮したいURLを入力">
+        <button id="shortenBtn">短縮する</button>
+        <p id="result"></p>
+    </div>
+
+    <script>
+        // === JavaScript ===
+        document.getElementById('shortenBtn').addEventListener('click', () => {
+            const longUrl = document.getElementById('longUrl').value;
+            const resultElement = document.getElementById('result');
+
+            if (!longUrl) {
+                resultElement.textContent = 'URLを入力してください。';
+                return;
+            }
+
+            fetch(`https://is.gd/create.php?format=json&url=${encodeURIComponent(longUrl)}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.shorturl) {
+                        resultElement.innerHTML = `短縮URL: <a href="${data.shorturl}" target="_blank">${data.shorturl}</a>`;
+                    } else {
+                        resultElement.textContent = '短縮に失敗しました。正しいURLを入力してください。';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    resultElement.textContent = 'エラーが発生しました。';
+                });
+        });
+    </script>
+</body>
+</html>
