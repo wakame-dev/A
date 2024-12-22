@@ -57,6 +57,7 @@
         <div id="qrcode"></div>
 
         <h3>QRコードをスキャン</h3>
+        <button onclick="startScanner()">スキャン開始</button>
         <video id="scanner" autoplay></video>
         <div id="scan-result">スキャン結果がここに表示されます</div>
     </div>
@@ -80,12 +81,31 @@
         }
 
         // QRコードスキャン
-        const qrScanner = new Html5QrcodeScanner("scanner", {
-            fps: 10,
-            qrbox: 250
-        });
+        let qrScanner;
 
-        qrScanner.render(onScanSuccess);
+        function startScanner() {
+            // カメラアクセスの要求
+            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                navigator.mediaDevices.getUserMedia({ video: true })
+                    .then(function (stream) {
+                        // カメラのストリームをビデオ要素にセット
+                        const videoElement = document.getElementById('scanner');
+                        videoElement.srcObject = stream;
+
+                        // スキャナーを開始
+                        qrScanner = new Html5QrcodeScanner("scanner", {
+                            fps: 10,
+                            qrbox: 250
+                        });
+                        qrScanner.render(onScanSuccess);
+                    })
+                    .catch(function (err) {
+                        alert("カメラのアクセスが拒否されました。カメラを許可してください。");
+                    });
+            } else {
+                alert("このブラウザではカメラのアクセスがサポートされていません。");
+            }
+        }
 
         function onScanSuccess(decodedText, decodedResult) {
             document.getElementById('scan-result').textContent = 'スキャン結果: ' + decodedText;
