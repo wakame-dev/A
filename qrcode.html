@@ -45,10 +45,6 @@
             border: 1px solid #ccc;
             margin-top: 20px;
         }
-
-        #toggle-camera {
-            margin-top: 10px;
-        }
     </style>
 </head>
 <body>
@@ -64,8 +60,6 @@
         <button onclick="startScanner()">スキャン開始</button>
         <video id="scanner" autoplay></video>
         <div id="scan-result">スキャン結果がここに表示されます</div>
-        
-        <button id="toggle-camera" onclick="toggleCamera()">カメラ切替</button>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
@@ -73,13 +67,13 @@
 
     <script>
         let currentStream;
-        let currentCamera = "environment";  // デフォルトを背面カメラに設定
         let qrScanner;
 
         // QRコード生成
         function generateQRCode() {
             const inputText = document.getElementById('qr-input').value;
             if (inputText) {
+                // QRコードを生成してCanvasに表示
                 QRCode.toCanvas(document.getElementById('qrcode'), inputText, function (error) {
                     if (error) {
                         console.error(error);
@@ -94,7 +88,7 @@
         function startScanner() {
             // カメラアクセスの要求
             if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-                navigator.mediaDevices.getUserMedia({ video: { facingMode: currentCamera } })
+                navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } })
                     .then(function (stream) {
                         // 既存のストリームを停止
                         if (currentStream) {
@@ -124,15 +118,6 @@
         // QRコードスキャン成功時の処理
         function onScanSuccess(decodedText, decodedResult) {
             document.getElementById('scan-result').textContent = 'スキャン結果: ' + decodedText;
-        }
-
-        // カメラを切り替える
-        function toggleCamera() {
-            // "user"は前面カメラ、"environment"は背面カメラ
-            currentCamera = (currentCamera === "environment") ? "user" : "environment";
-
-            // 新しいカメラを起動
-            startScanner();
         }
     </script>
 </body>
