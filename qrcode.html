@@ -45,6 +45,10 @@
             border: 1px solid #ccc;
             margin-top: 20px;
         }
+
+        #toggle-camera {
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -60,12 +64,18 @@
         <button onclick="startScanner()">スキャン開始</button>
         <video id="scanner" autoplay></video>
         <div id="scan-result">スキャン結果がここに表示されます</div>
+        
+        <button id="toggle-camera" onclick="toggleCamera()">カメラ切替</button>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
     <script src="https://unpkg.com/html5-qrcode/minified/html5-qrcode.min.js"></script>
 
     <script>
+        let currentStream;
+        let currentCamera = "user";  // "user"は前面カメラ、"environment"は背面カメラ
+        let qrScanner;
+
         // QRコード生成
         function generateQRCode() {
             const inputText = document.getElementById('qr-input').value;
@@ -80,15 +90,19 @@
             }
         }
 
-        // QRコードスキャン
-        let qrScanner;
-
+        // カメラを起動してQRコードスキャンを開始
         function startScanner() {
             // カメラアクセスの要求
             if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-                navigator.mediaDevices.getUserMedia({ video: true })
+                navigator.mediaDevices.getUserMedia({ video: { facingMode: currentCamera } })
                     .then(function (stream) {
-                        // カメラのストリームをビデオ要素にセット
+                        // 既存のストリームを停止
+                        if (currentStream) {
+                            currentStream.getTracks().forEach(track => track.stop());
+                        }
+                        
+                        // 新しいカメラストリームをセット
+                        currentStream = stream;
                         const videoElement = document.getElementById('scanner');
                         videoElement.srcObject = stream;
 
@@ -107,8 +121,18 @@
             }
         }
 
+        // QRコードスキャン成功時の処理
         function onScanSuccess(decodedText, decodedResult) {
             document.getElementById('scan-result').textContent = 'スキャン結果: ' + decodedText;
+        }
+
+        // カメラを切り替える
+        function toggleCamera() {
+            // "user"は前面カメラ、"environment"は背面カメラ
+            currentCamera = (currentCamera === "user") ? "environment" : "user";
+
+            // 新しいカメラを起動
+            startScanner();
         }
     </script>
 </body>
