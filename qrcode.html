@@ -73,7 +73,7 @@
 
     <script>
         let currentStream;
-        let currentCamera = "user";  // "user"は前面カメラ、"environment"は背面カメラ
+        let currentCamera = "environment";  // デフォルトを背面カメラに設定
         let qrScanner;
 
         // QRコード生成
@@ -129,7 +129,7 @@
         // カメラを切り替える
         function toggleCamera() {
             // "user"は前面カメラ、"environment"は背面カメラ
-            currentCamera = (currentCamera === "user") ? "environment" : "user";
+            currentCamera = (currentCamera === "environment") ? "user" : "environment";
 
             // 新しいカメラを起動
             startScanner();
