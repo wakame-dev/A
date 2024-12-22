@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QRコードの生成とスキャン</title>
+    <title>QRコードの生成とカメラでスキャン</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -49,7 +49,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>QRコードの生成とスキャン</h1>
+        <h1>QRコードの生成とカメラでスキャン</h1>
 
         <h3>QRコードを生成</h3>
         <input type="text" id="qr-input" placeholder="QRコードの内容を入力">
@@ -57,7 +57,7 @@
         <!-- QRコードを描画するためのCanvas要素 -->
         <canvas id="qrcode"></canvas>
 
-        <h3>QRコードをスキャン</h3>
+        <h3>カメラでQRコードをスキャン</h3>
         <button onclick="startScanner()">スキャン開始</button>
         <video id="scanner" autoplay></video>
         <div id="scan-result">スキャン結果がここに表示されます</div>
