@@ -149,6 +149,15 @@
             font-size: 1.1rem;
             font-weight: bold;
         }
+
+        .result a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        .result a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -157,46 +166,14 @@
         <p>以下のSNSに対応しています。各サービス名をクリックすると、例のURLが表示されます。</p>
         
         <ul>
-            <li>
-                <span class="service-name">X (旧Twitter):</span>
-                <a class="example-url" href="/x/example">x7f.xyz/x/example</a>
-            </li>
-            <li>
-                <span class="service-name">Discord:</span>
-                <a class="example-url" href="/discord/example">x7f.xyz/discord/example</a>
-            </li>
-            <li>
-                <span class="service-name">Instagram:</span>
-                <a class="example-url" href="/instagram/example">x7f.xyz/instagram/example</a>
-            </li>
-            <li>
-                <span class="service-name">Facebook:</span>
-                <a class="example-url" href="/facebook/example">x7f.xyz/facebook/example</a>
-            </li>
-            <li>
-                <span class="service-name">TikTok:</span>
-                <a class="example-url" href="/tiktok/example">x7f.xyz/tiktok/example</a>
-            </li>
-            <li>
-                <span class="service-name">YouTube:</span>
-                <a class="example-url" href="/youtube/@example">x7f.xyz/youtube/@example</a>
-            </li>
-            <li>
-                <span class="service-name">Snapchat:</span>
-                <a class="example-url" href="/snapchat/example">x7f.xyz/snapchat/example</a>
-            </li>
-            <li>
-                <span class="service-name">Pinterest:</span>
-                <a class="example-url" href="/pinterest/example">x7f.xyz/pinterest/example</a>
-            </li>
-            <li>
-                <span class="service-name">Reddit:</span>
-                <a class="example-url" href="/reddit/example">x7f.xyz/reddit/example</a>
-            </li>
-            <li>
-                <span class="service-name">Twitch:</span>
-                <a class="example-url" href="/twitch/example">x7f.xyz/twitch/example</a>
-            </li>
+            <li><span class="service-name">X (旧Twitter):</span><a class="example-url" href="/x/example">x7f.xyz/x/example</a></li>
+            <li><span class="service-name">Discord:</span><a class="example-url" href="/discord/example">x7f.xyz/discord/example</a></li>
+            <li><span class="service-name">Instagram:</span><a class="example-url" href="/instagram/example">x7f.xyz/instagram/example</a></li>
+            <li><span class="service-name">Facebook:</span><a class="example-url" href="/facebook/example">x7f.xyz/facebook/example</a></li>
+            <li><span class="service-name">TikTok:</span><a class="example-url" href="/tiktok/example">x7f.xyz/tiktok/example</a></li>
+            <li><span class="service-name">YouTube:</span><a class="example-url" href="/youtube/@example">x7f.xyz/youtube/@example</a></li>
+            <li><span class="service-name">Reddit:</span><a class="example-url" href="/reddit/example">x7f.xyz/reddit/example</a></li>
+            <li><span class="service-name">Twitch:</span><a class="example-url" href="/twitch/example">x7f.xyz/twitch/example</a></li>
         </ul>
 
         <h2>リダイレクトURL生成</h2>
@@ -209,14 +186,12 @@
                 <option value="facebook">Facebook</option>
                 <option value="tiktok">TikTok</option>
                 <option value="youtube">YouTube</option>
-                <option value="snapchat">Snapchat</option>
-                <option value="pinterest">Pinterest</option>
                 <option value="reddit">Reddit</option>
                 <option value="twitch">Twitch</option>
             </select>
 
             <label for="username">ユーザー名またはサーバー名</label>
-            <input type="text" id="username" placeholder="ユーザー名を入力してください">
+            <input type="text" id="username" placeholder="ユーザー名を入力してください" />
 
             <button onclick="generateUrl()">生成</button>
 
@@ -236,49 +211,16 @@
     <script>
         function generateUrl() {
             var service = document.getElementById("service").value;
-            var username = document.getElementById("username").value;
+            var username = document.getElementById("username").value.trim();
             var url = "";
 
-            if (username === "") {
+            if (!username) {
                 alert("ユーザー名を入力してください");
                 return;
             }
 
-            switch(service) {
-                case "x":
-                    url = "https://x.com/" + username;
-                    break;
-                case "discord":
-                    url = "https://discord.gg/" + username;
-                    break;
-                case "instagram":
-                    url = "https://www.instagram.com/" + username + "/";
-                    break;
-                case "facebook":
-                    url = "https://www.facebook.com/" + username;
-                    break;
-                case "tiktok":
-                    url = "https://www.tiktok.com/@" + username;
-                    break;
-                case "youtube":
-                    url = "https://youtube.com/" + username;
-                    break;
-                case "snapchat":
-                    url = "https://snapchat.com/add/" + username;
-                    break;
-                case "pinterest":
-                    url = "https://www.pinterest.com/" + username;
-                    break;
-                case "reddit":
-                    url = "https://www.reddit.com/user/" + username;
-                    break;
-                case "twitch":
-                    url = "https://www.twitch.tv/" + username;
-                    break;
-                default:
-                    alert("選択されたサービスが無効です");
-                    return;
-            }
+            // x7f.xyz/サービス名/ユーザー名またはサーバー名形式に変更
+            url = "https://x7f.xyz/" + service + "/" + username;
 
             document.getElementById("result").innerHTML = "生成されたURL: <a href='" + url + "' target='_blank'>" + url + "</a>";
         }
