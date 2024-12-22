@@ -99,7 +99,7 @@
 <body>
     <div class="container">
         <h1>リダイレクトサービス</h1>
-        <p>サービス名とユーザー名を入力して、短縮URLを生成してください。</p>
+        <p>サービス名とユーザー名を入力して、リダイレクトURLを生成してください。</p>
 
         <select id="serviceSelect">
             <option value="x">X (旧Twitter)</option>
@@ -127,9 +127,9 @@
             var pathArray = path.split('/');
 
             // リダイレクト処理
-            if (pathArray.length === 3) {
-                var service = pathArray[1];
-                var username = pathArray[2];
+            if (pathArray.length === 4 && pathArray[1] === "redirect") {
+                var service = pathArray[2];
+                var username = pathArray[3];
 
                 var redirectUrl = "";
 
@@ -165,35 +165,25 @@
                     case "twitch":
                         redirectUrl = "https://www.twitch.tv/" + username;
                         break;
-                    default:
-                        redirectUrl = ""; // 対応していないサービスの場合
-                        break;
                 }
 
+                // リダイレクト実行
                 if (redirectUrl) {
                     window.location.href = redirectUrl;
-                } else {
-                    document.body.innerHTML = "<h1>対応していないサービスです。</h1><p>ご指定のサービスはサポートされていません。</p>";
                 }
             }
         };
 
         function generateUrl() {
-            var service = document.getElementById('serviceSelect').value;
-            var username = document.getElementById('usernameInput').value.trim();
+            var service = document.getElementById("serviceSelect").value;
+            var username = document.getElementById("usernameInput").value.trim();
 
-            if (username === "") {
+            if (username) {
+                var url = "https://x7f.xyz/redirect/" + service + "/" + username;
+                document.getElementById("result").innerHTML = '生成されたURL: <a href="' + url + '" target="_blank">' + url + '</a>';
+            } else {
                 alert("ユーザー名またはサーバー名を入力してください。");
-                return;
             }
-
-            var generatedUrl = "https://x7f.xyz/" + service + "/" + username;
-            var resultDiv = document.getElementById('result');
-
-            resultDiv.innerHTML = `
-                <p>生成された短縮URL: <a href="${generatedUrl}" target="_blank">${generatedUrl}</a></p>
-                <p>このURLをクリックすると、指定したサービスのページにリダイレクトします。</p>
-            `;
         }
     </script>
 </body>
